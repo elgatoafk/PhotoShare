@@ -108,7 +108,6 @@ async def get_comment_by_id(db: AsyncSession, comment_id: int):
         HTTPException: If the comment is not found.
     """
     try:
-
         result = await db.execute(select(Comment).filter(Comment.id == comment_id))
         comment = result.scalars().first()
 
@@ -157,7 +156,7 @@ async def get_user_comment(db: AsyncSession, user_id: int, comment_id: int):
         Comment: The retrieved comment.
     """
     result = await db.execute(select(Comment).where(Comment.id == comment_id, Comment.user_id == user_id))
-    db_comment = result.scalars().first()
+    db_comment =  result.scalars().first()
     if db_comment is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Comment not found")
+        raise HTTPException(status_code=404, detail="Comment not found")
     return db_comment

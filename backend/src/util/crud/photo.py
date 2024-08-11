@@ -198,7 +198,7 @@ async def get_photo(db: AsyncSession, photo_id: int):
     """
 
     result = await db.execute(select(Photo).filter(Photo.id == photo_id))
-    db_photo = result.scalars().first()
+    db_photo = await result.scalars().first()
     if not db_photo:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Photo not found")
     return db_photo

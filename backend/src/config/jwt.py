@@ -39,9 +39,6 @@ async def create_access_token(data: dict, user_id: int, db: SessionLocal, expire
 
     return encoded_jwt
 
-
-
-
 def verify_token(token: str, db: Session = Depends(get_db)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,

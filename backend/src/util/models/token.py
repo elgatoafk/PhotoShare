@@ -25,8 +25,5 @@ class Token(Base):
     created_at = Column(DateTime, default=dt.utcnow)
     expires_at = Column(DateTime, default=lambda: dt.utcnow() + timedelta(minutes=30))
 
-
-
-
-
-    
+def is_token_blacklisted (db, token):
+    return None
